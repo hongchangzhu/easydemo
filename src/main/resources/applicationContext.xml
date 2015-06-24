@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd">
+
+	<context:annotation-config />
+	<context:component-scan base-package="com.cici.meiyu" />
+
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:/database.properties</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- 数据源 -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="${db.driverClassName}" />
+		<property name="url"
+			value="${db.url}?useUnicode=true&amp;characterEncoding=UTF-8&amp;characterSetResults=utf8&amp;connectionCollation=utf8_general_ci" />
+		<property name="username" value="${db.username}" />
+		<property name="password" value="${db.password}" />
+		<property name="initialSize" value="5" />
+		<property name="maxActive" value="50" />
+		<property name="maxIdle" value="20" />
+		<property name="minIdle" value="0" />
+		<property name="maxWait" value="120000" />
+		<property name="validationQuery" value="select 1" />
+		<property name="timeBetweenEvictionRunsMillis" value="120000" />
+		<property name="numTestsPerEvictionRun" value="3" />
+		<property name="minEvictableIdleTimeMillis" value="100000" />
+		<property name="removeAbandoned" value="true" />
+		<property name="removeAbandonedTimeout" value="300" />
+		<property name="logAbandoned" value="true" />
+		<property name="poolPreparedStatements" value="true" />
+		<property name="defaultAutoCommit" value="true" />
+	</bean>
+
+	<!-- 事务管理器 -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<!-- 事务拦截器 -->
+	<bean id="transactionInterceptor"
+		class="org.springframework.transaction.interceptor.TransactionInterceptor">
+		<!-- 事务管理器 -->
+		<property name="transactionManager" ref="transactionManager" />
+		<property name="transactionAttributes">
+			<props>
+				<prop key="find*">PROPAGATION_REQUIRED,readOnly</prop>
+				<prop key="get*">PROPAGATION_REQUIRED,readOnly</prop>
+				<prop key="load*">PROPAGATION_REQUIRED,readOnly</prop>
+				<prop key="query*">PROPAGATION_REQUIRED,readOnly</prop>
+				<prop key="create*">
+					PROPAGATION_REQUIRED
+				</prop>
+				<prop key="del*">
+					PROPAGATION_REQUIRED
+				</prop>
+				<prop key="update*">
+					PROPAGATION_REQUIRED
+				</prop>
+				<prop key="start*">
+					PROPAGATION_REQUIRED
+				</prop>
+				<prop key="cancel*">
+					PROPAGATION_REQUIRED
+				</prop>
+				<prop key="stop*">
+					PROPAGATION_REQUIRED
+				</prop>
+				<prop key="save*">
+					PROPAGATION_REQUIRED
+				</prop>
+				<prop key="add*">
+					PROPAGATION_REQUIRED
+				</prop>
+				<prop key="remove*">
+					PROPAGATION_REQUIRED
+				</prop>
+				<prop key="pay*">
+					PROPAGATION_REQUIRED
+				</prop>
+				<prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+			</props>
+		</property>
+	</bean>
+
+	<!--支持事务方法的业务对象及公共配置，具体业务可继承该配置 -->
+	<bean
+		class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+		<property name="beanNames">
+			<list>
+				<value>*DAO</value>
+			</list>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>transactionInterceptor</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- Use to response JSONObject list -->
+	<!--处理 @ResponseBody 中文乱码问题 -->
+	<bean
+		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<property name="messageConverters">
+			<list>
+				<bean
+					class="org.springframework.http.converter.StringHttpMessageConverter">
+					<property name="supportedMediaTypes">
+						<list>
+							<value>
+								text/html;charset=UTF-8
+							</value>
+						</list>
+					</property>
+				</bean>
+				<!-- 启动JSON格式的配置 -->
+				<bean id="jacksonMessageConverter"
+					class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+					<!-- 解决 HttpMediaTypeNotAcceptableException: Could not find acceptable 
+						representation -->
+					<property name="supportedMediaTypes">
+						<list>
+							<value>application/json;charset=UTF-8</value>
+						</list>
+					</property>
+				</bean>
+			</list>
+		</property>
+	</bean>
+	<bean
+		class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+		<property name="mediaTypes">
+			<map>
+				<entry key="html" value="text/html" />
+				<entry key="json" value="application/json" />
+			</map>
+		</property>
+		<property name="viewResolvers">
+			<list>
+				<bean
+					class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+					<property name="prefix" value="/WEB-INF/views/" />
+					<property name="suffix" value=".jsp" />
+				</bean>
+			</list>
+		</property>
+		<property name="defaultViews">
+			<list>
+				<bean
+					class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" />
+			</list>
+		</property>
+	</bean>
+
+</beans>

@@ -1,7 +1,11 @@
 apply plugin: 'java'
 apply plugin: 'eclipse'
+apply plugin:'war'
 
 sourceCompatibility = 1.5
+webAppDirName = 'WebContent'
+sourceSets.main.java.srcDir 'src'
+
 version = '1.0'
 jar {
     manifest {
@@ -13,35 +17,80 @@ repositories {
     mavenCentral()
 }
 
+project.ext.set('springframeworkVersion', '3.2.6.RELEASE')
 dependencies {
 	compile(
-		"aopalliance:aopalliance:1.0",
-		"org.freemarker:freemarker:2.3.16",
-		"commons-collections:commons-collections:3.2.1",
-		"commons-logging:commons-logging:1.1.3",
-		"dom4j:dom4j:1.6.1",
-		"log4j:log4j:1.2.17",
-		"org.slf4j:slf4j-api:1.7.7",
-		"org.slf4j:slf4j-log4j12:1.7.7",
-		"ognl:ognl:3.0.6",
-		"javax.servlet:servlet-api:2.5",
+		//apache
+		'org.apache.commons:commons-email:1.3.1',
+		'org.apache.commons:commons-pool2:2.0',
 		
-		"mysql:mysql-connector-java:5.1.29",
-		"commons-dbcp:commons-dbcp:1.4",
+		'org.apache.httpcomponents:fluent-hc:4.3.3',
+		'org.apache.httpcomponents:httpcore:4.3.2',
+		'org.apache.httpcomponents:httpclient:4.3.3',
+		'org.apache.httpcomponents:httpmime:4.3.3',
+		'org.apache.httpcomponents:httpclient-cache:4.3.3',
 		
-		"org.springframework:spring-aop:3.2.8.RELEASE",
-        "org.springframework:spring-asm:3.2.8.RELEASE",
-		"org.springframework:spring-beans:3.2.8.RELEASE",
-		"org.springframework:spring-context:3.2.8.RELEASE",
-		"org.springframework:spring-core:3.2.8.RELEASE",
-		"org.springframework:spring-expression:3.2.8.RELEASE",
-		"org.springframework:spring-jdbc:3.2.8.RELEASE",
-		"org.springframework:spring-tx:3.2.8.RELEASE",
-		"org.springframework:spring-web:3.2.8.RELEASE",
-		"org.springframework:spring-webmvc:3.2.8.RELEASE",
+		'commons-httpclient:commons-httpclient:3.1',
+		'commons-beanutils:commons-beanutils:1.8.0',
+		'commons-collections:commons-collections:3.2.1',
+		'commons-logging:commons-logging:1.1.3',
+		'commons-lang:commons-lang:2.5',
+		'commons-io:commons-io:2.4',
+		'commons-discovery:commons-discovery:0.2',
+		'commons-codec:commons-codec:1.6',
 		
-		"org.codehaus.jackson:jackson-mapper-asl:1.9.8",
-		"com.fasterxml.jackson.core:jackson-core:2.5.1",
+		//javax
+		'javax.activation:activation:1.1.1',
+		'javax.servlet:servlet-api:2.5',
+		
+		//json 
+		'net.sf.json-lib:json-lib:2.4:jdk15',
+		'net.sf.ezmorph:ezmorph:1.0.6',
+		'com.alibaba:fastjson:1.1.37',
+		'org.codehaus.jettison:jettison:1.2',
+		'org.codehaus.jackson:jackson-core-asl:1.7.4',
+		'org.codehaus.jackson:jackson-mapper-asl:1.7.4',
+		'org.codehaus.jackson:jackson-jaxrs:1.7.4',
+    	
+    	//spring && spring mvc
+		'org.springframework:spring-context-support:'+springframeworkVersion,
+		'org.springframework:spring-beans:'+ springframeworkVersion,
+		'org.springframework:spring-context:'+ springframeworkVersion,
+		'org.springframework:spring-expression:'+ springframeworkVersion,
+		'org.springframework:spring-jdbc:'+ springframeworkVersion,
+		'org.springframework:spring-tx:'+ springframeworkVersion,
+		'org.springframework:spring-web:'+ springframeworkVersion,
+		'org.springframework:spring-webmvc:'+ springframeworkVersion,
+		'org.springframework:spring-test:'+ springframeworkVersion,
+		'org.springframework:spring-core:'+ springframeworkVersion,
+		'org.springframework:spring-aop:'+ springframeworkVersion,
+		'org.springframework:spring-aspects:'+ springframeworkVersion,
+		
+		//aop && aspectJ
+		'aopalliance:aopalliance:1.0',
+		'org.aspectj:aspectjweaver:1.7.2',
+		
+		//cglib
+		'cglib:cglib-nodep:3.1',
+		
+		//jdbc driver && db datasource
+		'mysql:mysql-connector-java:5.0.7',
+		//'com.alibaba:druid:1.0.2',
+		"c3p0:c3p0:0.9.1.2",
+		
+		//logback && slf4j && log4j
+		'org.slf4j:slf4j-api:1.7.7',
+		'org.slf4j:log4j-over-slf4j:1.7.7',
+		'ch.qos.logback:logback-core:1.1.2',
+		'ch.qos.logback:logback-classic:1.1.2',
+		'ch.qos.logback:logback-access:1.1.2',
+		'org.logback-extensions:logback-ext-spring:0.1.2',
+		
+		//xstream
+		'com.thoughtworks.xstream:xstream:1.4.8',
+		
+		//junit
+		'junit:junit:4.+',
 	)
 }
 

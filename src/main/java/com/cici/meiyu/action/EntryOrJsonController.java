@@ -3,7 +3,6 @@ package com.cici.meiyu.action;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.catalina.User;
 import org.apache.log4j.Logger;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -18,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.cici.meiyu.bo.User;
 
 @Controller
 @RequestMapping(value = "ec")
@@ -84,7 +85,7 @@ public class EntryOrJsonController {
 	@RequestMapping(value = "annotationParamsReturn", method = RequestMethod.GET)
 	@ResponseBody
 	public ResponseEntity<String> annotationParamsReturn(HttpEntity<User> user) {
-		String temp = user.getBody().getUsername();
+		String temp = user.getBody().getUserName();
 		ResponseEntity<String> responseResult = new ResponseEntity<String>(temp, HttpStatus.OK);
 		return responseResult;
 	}

@@ -20,9 +20,7 @@
 
 	<context:annotation-config />
 	<!-- 启动包扫描功能，以便注册带有@Controller、@Service、@repository、@Component等注解的类成为spring的bean -->
-	<context:component-scan base-package="com.kingdee.open.talk.services" />
-	<context:component-scan base-package="com.kingdee.open.talk.dao" />
-	<context:component-scan base-package="com.kingdee.open.talk.controller" />
+	<context:component-scan base-package="com.example" />
 
 	<!-- ②：启动Spring MVC的注解功能，完成请求和注解POJO的映射，添加拦截器，类级别的处理器映射 -->
 	<bean

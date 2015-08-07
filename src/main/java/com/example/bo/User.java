@@ -1,6 +1,8 @@
-package com.cici.meiyu.bo;
+package com.example.bo;
 
-public class User {
+import com.framework.dao.IBean;
+
+public class User implements IBean{
 	private String userName;
 
 	public String getUserName() {

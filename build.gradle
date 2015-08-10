@@ -18,7 +18,6 @@ repositories {
 }
 
 project.ext.set('springframeworkVersion', '3.2.6.RELEASE')
-project.ext.set('xfireVersion', '1.2.6')
 dependencies {
 	compile(
 		//apache
@@ -52,7 +51,6 @@ dependencies {
 		'org.codehaus.jackson:jackson-core-asl:1.7.4',
 		'org.codehaus.jackson:jackson-mapper-asl:1.7.4',
 		'org.codehaus.jackson:jackson-jaxrs:1.7.4',
-		'com.google.code.gson:gson:2.3.1',
     	
     	//spring && spring mvc
 		'org.springframework:spring-context-support:'+springframeworkVersion,
@@ -93,23 +91,6 @@ dependencies {
 		
 		//junit
 		'junit:junit:4.+',
-		
-		'org.apache.poi:poi:3.2-FINAL',
-		
-		//xfire
-		//'org.codehaus.xfire:xfire-aegis:'+xfireVersion,
-		//'org.codehaus.xfire:xfire-annotations:'+xfireVersion,
-		//'org.codehaus.xfire:xfire-core:'+xfireVersion,
-		//'org.codehaus.xfire:xfire-java5:'+xfireVersion,
-		//'org.codehaus.xfire:xfire-jaxb2:'+xfireVersion,
-		//'org.codehaus.xfire:xfire-jaxws:'+xfireVersion,
-		//'org.codehaus.xfire:xfire-spring:'+xfireVersion,
-		//'xfire:xfire-jsr181-api:1.0-M1',
-		//'org.codehaus.xfire:xfire-all:1.2.6',
-		//'wsdl4j:wsdl4j:1.6.1',
-		//'org.apache.ws.commons:XmlSchema:1.1',
-		//'org.apache.ws.commons.schema:XmlSchema:1.4.7',
-		'jdom:jdom:1.0',
 	)
 }
 

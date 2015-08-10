@@ -8,11 +8,11 @@
 <!-- http://www.qos.ch/shop/products/professionalSupport -->
 <!-- -->
 <configuration>
-	<appender name="easydemo"
+	<appender name="sa"
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<!--See also http://logback.qos.ch/manual/appenders.html#RollingFileAppender -->
 		<encoding>UTF-8</encoding>
-		<File>${catalina.base}/logs/easydemo.log</File>
+		<File>${catalina.base}/logs/sa.log</File>
 		<encoder>
 			<pattern>[%d{yyy-MM-dd HH:mm:ss}] %m [%c]%n</pattern>
 		</encoder>
@@ -36,10 +36,10 @@
 	</appender>
 
 	<logger name="com.framework" level="info">
-		<appender-ref ref="easydemo" />
+		<appender-ref ref="sa" />
 	</logger>
 	<root level="info">
 		<appender-ref ref="cosole" />
-		<appender-ref ref="easydemo" />
+		<appender-ref ref="sa" />
 	</root>
 </configuration>

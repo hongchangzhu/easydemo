@@ -14,8 +14,7 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="src/test/resources">
-		<attribute name="maven.pomderived" value="true"/>
-	</classpathentry>
+		<attribute name="maven.pomderived" value="true"/>	</classpathentry>
 	<classpathentry exported="true" kind="con" path="org.springsource.ide.eclipse.gradle.classpathcontainer">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>

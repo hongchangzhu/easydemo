@@ -22,10 +22,8 @@ public class BaseController extends Base implements IBaseController {
 	public void processError(Map<String, Object> map, Throwable e) {
 		if (StringUtils.isEmpty((String) map.get("error"))) {
 			if (e != null && e.getMessage() != null) {
-
 				map.put("error", e.getMessage());
 			} else if (e != null && e.getCause() != null) {
-
 				map.put("error", e.getCause().getMessage());
 			} else if (e != null) {
 				map.put("error", e.toString());

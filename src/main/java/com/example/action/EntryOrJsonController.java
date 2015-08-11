@@ -1,7 +1,12 @@
 package com.example.action;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
+import net.sf.json.JSONObject;
 
 import org.apache.log4j.Logger;
 import org.springframework.http.HttpEntity;
@@ -12,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.ServletRequestBindingException;
 import org.springframework.web.bind.ServletRequestUtils;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,6 +31,19 @@ import com.example.bo.User;
 public class EntryOrJsonController {
 
 	private Logger log = Logger.getLogger(EntryOrJsonController.class);
+
+	// REST风格的请求，参数作为url的一部分，返回JSON
+	@ResponseBody
+	@RequestMapping(value = "/person/{personId}", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
+	public String findPerson(@PathVariable String personId) {
+		System.out.println(personId);
+		Map<String, Object> map = new LinkedHashMap<String, Object>();
+		map.put("success", true);
+		map.put("error", null);
+		map.put("errorCode", 100);
+		map.put("data", null);
+		return JSONObject.fromObject(map).toString();
+	}
 
 	/**
 	 * 输入为JSON格式的数据的方式 1、@RequestBody 将httpRequest的body绑定到方法参数上

@@ -11,7 +11,6 @@ public class Base implements IBase {
 	private static Logger logger = LoggerFactory.getLogger(Base.class);
 
 	public void logError(Object error, Object errorCode, Object message) {
-
 		logger.error(error + "[" + errorCode + "/" + message + "]");
 	}
 
@@ -25,7 +24,6 @@ public class Base implements IBase {
 
 	public void logInfo(Object obj) {
 		if (obj == null) {
-
 			return;
 		}
 		logger.info(obj.toString());

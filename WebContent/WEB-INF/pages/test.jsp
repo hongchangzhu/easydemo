@@ -8,5 +8,6 @@
 </head>
 <body>
 test
+${name }
 </body>
 </html>

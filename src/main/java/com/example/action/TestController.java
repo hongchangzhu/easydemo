@@ -1,11 +1,9 @@
 package com.example.action;
 
-import java.util.HashMap;
-
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.framework.base.BaseController;
 
@@ -19,5 +17,20 @@ public class TestController extends BaseController {
 		log.info("*********************");
 		// return this.SUCCESS(new HashMap<String, Object>());
 		return "test";
+	}
+	
+	/**
+	 * 
+	 * @author chenhao
+	 * @date 2015年8月11日 下午4:59:21
+	 * @param map 封装了给前端的数据
+	 * @return
+	 */
+	@RequestMapping(value = "/pages/reg4")
+	public String reg4(ModelMap map) {
+		System.out.println("BaseController.handleRequest()");
+		map.put("name", "king");
+		return "test";
+		// return "redirect:http://www.kingdee.com";
 	}
 }

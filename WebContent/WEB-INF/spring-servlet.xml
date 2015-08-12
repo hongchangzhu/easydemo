@@ -87,6 +87,8 @@
 			</list>
 		</property>
 	</bean>
+	
+	<mvc:resources mapping="/js/**" location="/js/" />
 
 
 	<!-- <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" 

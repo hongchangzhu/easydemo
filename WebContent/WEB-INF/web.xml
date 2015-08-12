@@ -55,17 +55,17 @@
     </servlet-mapping>  
 
 	<welcome-file-list>
-		<welcome-file>login.jsp</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
 
 	<error-page>
 		<error-code>403</error-code>
-		<location>/login.jsp</location>
+		<location>/index.jsp</location>
 	</error-page>
 
 	<error-page>
 		<error-code>500</error-code>
-		<location>/WEB-INF/jsp/error/500.jsp</location>
+		<location>/WEB-INF/pages/error/500.jsp</location>
 	</error-page>
 
 </web-app>

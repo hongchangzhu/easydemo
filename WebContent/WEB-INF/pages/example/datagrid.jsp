@@ -23,72 +23,48 @@
 		DataGrid.</p>
 	<div style="margin: 20px 0;"></div>
 
-	<table id="dg">
+	<table id="dg" class="easyui-datagrid" title="Basic DataGrid"
+		style="width: 700px; height: 350px"
+		method="post"             
+        idField="FAppID"     
+        rownumbers="true" 
+        pagination="true"   
+        singleSelect="true"   
+        showFooter="false"     
+        collapsible="false" 
+        url="<%=contextPath%>/easyui/query"
+		>
 		<thead>
 			<tr>
-				<th data-options="field:'FAppID',width:80">FAppID</th>
-				<th data-options="field:'FAppName',width:100">FAppName</th>
+				<th data-options="field:'FAppID',width:80">应用ID</th>
+				<th data-options="field:'FAppName',width:150">应用名称</th>
 			</tr>
 		</thead>
 	</table>
+	
+	<%-- <table id="dg" class="easyui-datagrid" title="应用列表"
+		style="width: 700px; height: 350px" rownumbers="true" iconCls="icon-save" rownumbers="true" showFooter="false"
+		data-options="singleSelect:true,collapsible:false,url:'<%=contextPath%>/easyui/query',pagination:true,method:'post'">
+		<thead>
+			<tr>
+				<th data-options="field:'FAppID',width:80">应用ID</th>
+				<th data-options="field:'FAppName',width:150">应用名称</th>
+			</tr>
+		</thead>
+	</table> --%>
+	
+
+	
+
 </body>
 </html>
 <script type="text/javascript">
-	//datagrid初始化 
-	$('#dg').datagrid({
-		title : '应用系统列表',
-		iconCls : 'icon-edit',//图标 
-		width : 700,
-		height : 'auto',
-		nowrap : false,
-		striped : true,
-		border : true,
-		collapsible : false,//是否可折叠的 
-		fit : true,//自动大小 
-		url : '<%=basePath%>/easyui/query',
-		//sortName: 'code', 
-		//sortOrder: 'desc', 
-		remoteSort : false,
-		idField : 'FAppID',
-		singleSelect : false,//是否单选 
-		pagination : true,//分页控件 
-		rownumbers : true,//行号 
-		frozenColumns : [ [ {
-			field : 'FAppName',
-			checkbox : true
-		} ] ],
-		toolbar : [ {
-			text : '添加',
-			iconCls : 'icon-add',
-			handler : function() {
-				openDialog("add_dialog", "add");
-			}
-		}, '-', {
-			text : '修改',
-			iconCls : 'icon-edit',
-			handler : function() {
-				openDialog("add_dialog", "edit");
-			}
-		}, '-', {
-			text : '删除',
-			iconCls : 'icon-remove',
-			handler : function() {
-				delAppInfo();
-			}
-		} ],
-	});
-	//设置分页控件 
-	var p = $('#dg').datagrid('getPager');
-	$(p).pagination({
-		pageSize : 10,//每页显示的记录条数，默认为10 
-		pageList : [ 5, 10, 15 ],//可以设置每页记录条数的列表 
-		beforePageText : '第',//页数文本框前显示的汉字 
-		afterPageText : '页    共 {pages} 页',
-		displayMsg : '当前显示 {from} - {to} 条记录   共 {total} 条记录',
-	/*onBeforeRefresh:function(){
-	    $(this).pagination('loading');
-	    alert('before refresh');
-	    $(this).pagination('loaded');
-	}*/
-	});
+<%-- $.ajax({
+    url: "<%=contextPath%>/easyui/query",
+    type: "post",
+    success: function (text) {
+    	var data = JSON.parse(text);//转换成json对象，必须的！！！不然有异常！！！  
+    	$('#dg').datagrid('loadData', data); 
+    }
+}); --%>
 </script>

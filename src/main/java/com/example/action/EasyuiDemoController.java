@@ -4,6 +4,9 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import org.apache.log4j.Logger;
@@ -12,6 +15,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -39,7 +43,8 @@ public class EasyuiDemoController {
 
 	@ResponseBody
 	@RequestMapping(value = "query", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
-	public String query() {
+	public JSONObject query(HttpServletRequest request, @RequestParam(value = "page") int page,
+			@RequestParam(value = "rows") int rows) {
 		List<Map<String, Object>> list = null;
 		try {
 			list = this.commonDao.query("select * from t_app ");
@@ -47,13 +52,22 @@ public class EasyuiDemoController {
 			e.printStackTrace();
 		}
 		Map<String, Object> map = new LinkedHashMap<String, Object>();
-		map.put("success", true);
-		map.put("error", null);
-		map.put("errorCode", 100);
-		map.put("total", list.size());
-		map.put("rows", list);
+		JSONArray array = new JSONArray();
+		JSONObject jsonObj = new JSONObject();
+		jsonObj.put("FAppID", 1);
+		jsonObj.put("FAppName", "测试");
+		array.add(jsonObj);
 
+		List<Map<String, Object>> subList = list.subList(0, 10);
+		map.put("total", list.size());
+		map.put("rows", subList);
 		String rtn = JSONObject.fromObject(map).toString();
-		return rtn;
+		JSONObject jo = JSONObject.fromObject(rtn);
+
+		JSONObject data = new JSONObject();
+		data.put("total", list.size());
+		data.put("rows", array);
+
+		return data;
 	}
 }

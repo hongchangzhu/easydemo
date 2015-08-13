@@ -21,16 +21,15 @@
     return path;
 }
 
-var bootPATH = __CreateJSPath("boot.js");
+var bootPATH = __CreateJSPath("boot.js");   
 
-//debugger
-mini_debugger = true;   
-
-//miniui
 document.write('<script src="' + bootPATH + 'easyui/jquery.min.js" type="text/javascript"></sc' + 'ript>');
 document.write('<script src="' + bootPATH + 'easyui/jquery.easyui.min.js" type="text/javascript" ></sc' + 'ript>');
+document.write('<script src="' + bootPATH + 'easyui/locale/easyui-lang-zh_CN.js" type="text/javascript"></sc' + 'ript>');
+
 document.write('<link href="' + bootPATH + 'easyui/themes/default/easyui.css" rel="stylesheet" type="text/css" />');
 document.write('<link href="' + bootPATH + 'easyui/themes/icon.css" rel="stylesheet" type="text/css" />');
+document.write('<link href="' + bootPATH + 'easyui/demo.css" rel="stylesheet" type="text/css" />');
 
 ////////////////////////////////////////////////////////////////////////////////////////
 function getCookie(sName) {

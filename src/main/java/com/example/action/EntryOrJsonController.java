@@ -36,14 +36,14 @@ public class EntryOrJsonController {
 
 	// REST风格的请求，参数作为url的一部分，返回JSON
 	@ResponseBody
-	@RequestMapping(value = "/person/{personId}", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
-	public String findPerson(@PathVariable String personId) {
+	@RequestMapping(value = "/person/{personId}", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	public String findPerson(@PathVariable String personId, @RequestBody List<Map<String, Object>> list) {
 		System.out.println(personId);
 		Map<String, Object> map = new LinkedHashMap<String, Object>();
 		map.put("success", true);
 		map.put("error", null);
 		map.put("errorCode", 100);
-		map.put("data", null);
+		map.put("data", list);
 		return JSONObject.fromObject(map).toString();
 	}
 
@@ -98,7 +98,7 @@ public class EntryOrJsonController {
 
 		mav.put("model", modelMap);
 		mav.put("modelMap", modelMap);
-		//mav.put("welcome");
+		// mav.put("welcome");
 		return mav;
 	}
 

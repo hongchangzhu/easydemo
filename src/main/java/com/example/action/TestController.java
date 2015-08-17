@@ -1,15 +1,11 @@
 package com.example.action;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.ServletRequestBindingException;
@@ -17,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.framework.base.BaseController;
 
@@ -27,18 +22,14 @@ public class TestController extends BaseController {
 	private Logger log = Logger.getLogger(TestController.class);
 
 	@RequestMapping(value = "stat", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
-	public ModelAndView stat(@RequestBody List<Map<String, Object>> list) {
+	@ResponseBody
+	public ModelMap stat(@RequestBody List<Map<String, Object>> list) {
 		log.info("*********************");
-		Map<String, Object> map = new HashMap<String, Object>();
-		HttpHeaders httpHeaders = new HttpHeaders();
-		// ResponseEntity<String> responseEntity = new
-		// ResponseEntity<String>("Hello WY!", httpHeaders, HttpStatus.CREATED);
-		// return responseEntity;
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("data", "");
-		mav.addObject("success", true);
-		// return this.SUCCESS(map);
-		return mav;
+		// Map<String, Object> map = new HashMap<String, Object>();
+		ModelMap modelMap = new ModelMap();
+		modelMap.put("data", "");
+		modelMap.put("success", true);
+		return modelMap;
 	}
 
 	/**

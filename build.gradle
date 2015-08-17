@@ -66,6 +66,9 @@ dependencies {
 		'org.springframework:spring-aop:'+ springframeworkVersion,
 		'org.springframework:spring-aspects:'+ springframeworkVersion,
 		
+		//quartz dependence commons-collections & spring-web & spring-context-support
+		"quartz:quartz:1.5.2",
+		
 		//aop && aspectJ
 		'aopalliance:aopalliance:1.0',
 		'org.aspectj:aspectjweaver:1.7.2',

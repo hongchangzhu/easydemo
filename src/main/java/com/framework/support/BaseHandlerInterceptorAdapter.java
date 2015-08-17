@@ -36,8 +36,8 @@ public class BaseHandlerInterceptorAdapter extends HandlerInterceptorAdapter {
 		long endTime = System.currentTimeMillis();// 2、结束时间
 		long beginTime = startTimeThreadLocal.get();// 得到线程绑定的局部变量（开始时间）
 		long consumeTime = endTime - beginTime;// 3、消耗的时间
-//		logger.info(String.format("The resource '%s' consume %d millis when executed.", request.getRequestURI(),
-//				consumeTime));
+		logger.info(String.format("The resource '%s' consume %d millis when executed.", request.getRequestURI(),
+				consumeTime));
 	}
 
 	public void afterConcurrentHandlingStarted(HttpServletRequest request, HttpServletResponse response, Object handler)

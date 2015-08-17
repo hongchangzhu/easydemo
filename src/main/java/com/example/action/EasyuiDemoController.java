@@ -6,7 +6,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import org.apache.log4j.Logger;
@@ -19,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.bo.App;
 import com.framework.dao.CommonDao;
 
 @Controller
@@ -41,33 +41,32 @@ public class EasyuiDemoController {
 		return mav;
 	}
 
+	private static final int DEFAULT_PAGE = 1;
+	private static final int DEFAULT_PAGE_COUNT = 10;
+
 	@ResponseBody
 	@RequestMapping(value = "query", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	public JSONObject query(HttpServletRequest request, @RequestParam(value = "page") int page,
 			@RequestParam(value = "rows") int rows) {
-		List<Map<String, Object>> list = null;
+		String submitData = request.getParameter("submitData");
+		String queryParams = request.getParameter("queryParams");
+		if (page <= 0)
+			page = DEFAULT_PAGE;
+		if (rows <= 0)
+			rows = DEFAULT_PAGE_COUNT;
+		int start = (page - 1) * rows;
+		List<App> list = null;
+		int count = 0;
 		try {
-			list = this.commonDao.query("select * from t_app ");
+			list = this.commonDao.queryBeans("select * from t_app ", App.class, start, rows);
+			count = this.commonDao.queryIntegerValue("select count(*) from t_app ");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		Map<String, Object> map = new LinkedHashMap<String, Object>();
-		JSONArray array = new JSONArray();
-		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("FAppID", 1);
-		jsonObj.put("FAppName", "测试");
-		array.add(jsonObj);
-
-		List<Map<String, Object>> subList = list.subList(0, 10);
-		map.put("total", list.size());
-		map.put("rows", subList);
-		String rtn = JSONObject.fromObject(map).toString();
-		JSONObject jo = JSONObject.fromObject(rtn);
-
-		JSONObject data = new JSONObject();
-		data.put("total", list.size());
-		data.put("rows", array);
-
+		map.put("total", count);
+		map.put("rows", list);
+		JSONObject data = JSONObject.fromObject(map);
 		return data;
 	}
 }

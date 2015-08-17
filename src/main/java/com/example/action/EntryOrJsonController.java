@@ -1,6 +1,8 @@
 package com.example.action;
 
+import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -66,9 +68,10 @@ public class EntryOrJsonController {
 	 * @return
 	 * @throws ServletRequestBindingException
 	 */
-	@RequestMapping(value = "commonReturnType", method = RequestMethod.GET)
+	@RequestMapping(value = "commonReturnType", method = RequestMethod.POST)
 	@ResponseBody
-	public ModelAndView commonReturnType(HttpSession session) throws ServletRequestBindingException {
+	public ModelAndView commonReturnType(HttpSession session, @RequestBody List<Map<String, Object>> list)
+			throws ServletRequestBindingException {
 		ModelAndView mav = new ModelAndView();
 		session.setAttribute("userName", "使用ResponseBody输出！");
 		log.info("=================使用ResponseBody输出====================");
@@ -79,6 +82,23 @@ public class EntryOrJsonController {
 		mav.addObject("model", modelMap);
 		mav.addObject("modelMap", modelMap);
 		mav.setViewName("welcome");
+		return mav;
+	}
+
+	@RequestMapping(value = "query", method = RequestMethod.POST)
+	@ResponseBody
+	public Map query(HttpSession session, @RequestBody List<Map<String, Object>> list)
+			throws ServletRequestBindingException {
+		Map mav = new HashMap();
+		session.setAttribute("userName", "使用ResponseBody输出！");
+		log.info("=================使用ResponseBody输出====================");
+		ModelMap modelMap = new ModelMap();
+		modelMap.put("mapKey", "mapValue");
+		modelMap.addAttribute("attributeKey", "attributeValue");
+
+		mav.put("model", modelMap);
+		mav.put("modelMap", modelMap);
+		//mav.put("welcome");
 		return mav;
 	}
 

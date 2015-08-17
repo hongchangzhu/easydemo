@@ -21,7 +21,7 @@ project.ext.set('springframeworkVersion', '3.2.6.RELEASE')
 dependencies {
 	compile(
 		//apache
-		'org.apache.commons:commons-email:1.3.1',
+		//'org.apache.commons:commons-email:1.3.1',
 		'org.apache.commons:commons-pool2:2.0',
 		
 		'org.apache.httpcomponents:fluent-hc:4.3.3',

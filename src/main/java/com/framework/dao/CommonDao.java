@@ -21,6 +21,8 @@ import java.util.UUID;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.support.JdbcUtils;
 
 import com.framework.dao.page.IPage;
@@ -38,6 +40,8 @@ public class CommonDao {
 	public static final Logger logger = Logger.getLogger(CommonDao.class);
 
 	// 页属性
+	@Qualifier("dao-page")
+	@Autowired
 	private IPage page;
 	// 连接管理器
 	private static ConnectionProvider connectionProvider;

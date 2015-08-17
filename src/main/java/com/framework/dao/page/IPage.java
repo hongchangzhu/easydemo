@@ -5,6 +5,8 @@ package com.framework.dao.page;
  * 
  */
 public interface IPage {
+	public static final int DEFAULT_PAGE = 1;
+	public static final int DEFAULT_PAGE_COUNT = 10;
 
 	String synthesisPage(String baseSQL, int from, int pageSize);
 

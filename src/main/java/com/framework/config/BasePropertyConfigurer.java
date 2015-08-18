@@ -10,6 +10,12 @@ import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 import org.springframework.util.PropertyPlaceholderHelper;
 
+/**
+ * 读取配置文件，继承spring的PropertyPlaceholderConfigurer类，扩展了可以在代码中显示调用以获取配置值功能
+ * 
+ * @date 2015年8月18日 上午10:02:37
+ * @version 1.0
+ */
 public class BasePropertyConfigurer extends PropertyPlaceholderConfigurer {
 	private static Map<String, String> properties = new HashMap<String, String>();
 	private static BasePropertyConfigurer instance = new BasePropertyConfigurer();

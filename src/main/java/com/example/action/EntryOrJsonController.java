@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.bo.User;
+import com.framework.config.BasePropertyConfigurer;
 
 @Controller
 @RequestMapping(value = "ec")
@@ -44,6 +45,7 @@ public class EntryOrJsonController {
 		map.put("error", null);
 		map.put("errorCode", 100);
 		map.put("data", list);
+		log.info(BasePropertyConfigurer.getInstance().getString("db.password"));
 		return JSONObject.fromObject(map).toString();
 	}
 

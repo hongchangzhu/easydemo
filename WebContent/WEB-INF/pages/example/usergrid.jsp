@@ -15,6 +15,7 @@
 <script type="text/javascript" src="<%=contextPath%>/js/boot.js"></script>
 </head>
 <body>
+<div id="p" class="easyui-panel" title="" style="width:800px;height:100%;padding:10px;align:center">
 	<h2>Basic DataGrid</h2>
 	<p>The DataGrid is created from markup, no JavaScript code needed.</p>
 	<div style="margin: 20px 0;"></div>
@@ -78,6 +79,7 @@
 	    </div>
 	    </div>
 	</div>
+</div>
 </body>
 </html>
 <script type="text/javascript">

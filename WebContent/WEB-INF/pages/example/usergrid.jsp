@@ -74,8 +74,8 @@
 	    	</table>
 	    </form>
 	    <div style="text-align:center;padding:5px">
-	    	<a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm()">Submit</a>
-	    	<a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm()">Clear</a>
+	    	<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" onclick="submitForm()">提交</a>
+	    	<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="clearForm()">清除</a>
 	    </div>
 	    </div>
 	</div>
@@ -88,7 +88,26 @@ function add(){
 	//user/insert', '_self');
 	}
 function submitForm(){
-	$('#ff').form('submit');
+	$('#ff').form('submit',{
+        url: '<%=contextPath%>/user/query',
+        onSubmit: function(param){
+        	alert(JSON.stringify(param))
+            return $(this).form('validate');
+        },
+        success: function(result){
+            //var result = eval('('+result+')');
+            alert(result)
+            if (result.errorMsg){
+                $.messager.show({
+                    title: 'Error',
+                    msg: result.errorMsg
+                });
+            } else {
+                $('#w').dialog('close');        // close the dialog
+                //$('#dg').datagrid('reload');    // reload the user data
+            }
+        }
+    });
 }
 function clearForm(){
 	$('#ff').form('clear');

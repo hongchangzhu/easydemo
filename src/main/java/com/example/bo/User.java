@@ -59,4 +59,11 @@ public class User implements IBean {
 	public void setNote(String note) {
 		this.note = note;
 	}
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("userName=" + this.userName);
+		return sb.toString();
+	}
 }

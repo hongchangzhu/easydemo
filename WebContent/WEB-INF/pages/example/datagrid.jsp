@@ -22,16 +22,12 @@
 	<p>This sample shows how to implement client side pagination in
 		DataGrid.</p>
 	<div style="margin: 20px 0;"></div>
-	<input class="easyui-validatebox easyui-datebox" data-options="sharedCalendar:'#cc',required:true">
-	<div id="cc" class="easyui-calendar"></div>
-	
 	<form id="" action="">
-
 	<table id="dg" class="easyui-datagrid" title="Basic DataGrid"
 		style="width: 700px; height: 350px" method="post" idField="FAppID"
 		rownumbers="true" pagination="true" singleSelect="true"
 		showFooter="false" collapsible="false" toolbar="#tb"
-		url="<%=contextPath%>/easyui/query">
+		>
 		<thead>
 			<tr>
 				<th data-options="field:'FAppID',width:80">应用ID</th>
@@ -55,6 +51,10 @@
 <script type="text/javascript">
 
 var dg = $('#dg');
+dg.datagrid({
+    url:'<%=contextPath%>/easyui/query'
+});
+
 function doSearch(){
 	var searchDiv = $('#tb');
 	var divEle = searchDiv.find(':input[disabled!="disabled"][id]');

@@ -14,7 +14,7 @@
 
 	<mvc:interceptors>
 		<mvc:interceptor><!-- 对所有的请求拦截使用/** ,对某个模块下的请求拦截使用：/myPath/* -->
-			<mvc:mapping path="/**" />
+			<mvc:mapping path="/user/*" />
 			<bean class="com.framework.support.BaseHandlerInterceptorAdapter"></bean>
 		</mvc:interceptor>
 	</mvc:interceptors>
